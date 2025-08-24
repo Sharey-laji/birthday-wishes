@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爷爷生日快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner {
+            font-size: 24px;
+            color: #d50000;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .line {
+            margin: 25px 0;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+        
+        .line1 {
+            font-size: 36px;
+            color: #d50000;
+        }
+        
+        .line2 {
+            font-size: 42px;
+            color: #c51162;
+        }
+        
+        .line3 {
+            font-size: 32px;
+            color: #aa00ff;
+        }
+        
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .blink {
+            animation: blink 2s infinite;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        
+        .decorations {
+            margin-top: 30px;
+            font-size: 30px;
+            color: #ff6699;
+        }
+        
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: fall 10s linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">❤ 衷心祝福 ❤</div>
+        
+        <div class="line line1">祝爷爷</div>
+        <div class="line line2">生日快乐</div>
+        <div class="line line3">福如东海 寿比南山</div>
+        
+        <div class="decorations">
+            🎂 🎁 🎈 🎊 🎉
+        </div>
+        
+        <div class="footer">
+            <p>专属生日祝福页面</p>
+        </div>
+    </div>
+    
+    <div class="hearts" id="hearts"></div>
+
+    <script>
+        // 创建飘落的心形
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const hearts = ['❤', '💖', '💗', '💓', '💞'];
+            const colors = ['#ff6699', '#ff3366', '#ff99cc', '#ff66cc', '#ff33cc'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // 显示文字行
+        function showLines() {
+            const lines = document.querySelectorAll('.line');
+            
+            // 第一行
+            setTimeout(() => {
+                lines[0].classList.add('show');
+            }, 1000);
+            
+            // 第二行
+            setTimeout(() => {
+                lines[1].classList.add('show');
+            }, 2000);
+            
+            // 第三行
+            setTimeout(() => {
+                lines[2].classList.add('show');
+                
+                // 所有行显示完成后添加闪烁效果
+                setTimeout(() => {
+                    lines.forEach(line => {
+                        line.classList.add('blink');
+                    });
+                }, 1000);
+            }, 3000);
+        }
+        
+        // 页面加载完成后执行
+        window.onload = function() {
+            createHearts();
+            showLines();
+        };
+    </script>
+</body>
+</html>
